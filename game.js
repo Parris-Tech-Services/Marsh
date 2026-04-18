@@ -1446,7 +1446,22 @@
       btn.addEventListener('click', () => {
         const dir = btn.dataset.dir;
         const map = { n:[0,-1], s:[0,1], e:[1,0], w:[-1,0] };
-        moveTown(...map[dir]);
+        dom.townMovePad?.querySelectorAll('button[data-dir]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const dir = btn.dataset.dir;
+    const map = {
+      n: [0, -1],
+      s: [0, 1],
+      e: [1, 0],
+      w: [-1, 0]
+    };
+
+    const step = map[dir];
+    if (!step) return;
+
+    moveTown(step[0], step[1]);
+  });
+});
       });
     });
     window.addEventListener('keydown', (ev) => {
